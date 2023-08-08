@@ -17,8 +17,7 @@ namespace ArthurCallouts.Callouts
         //private Ped _Suspect;
         private Ped[] _Suspects;
 
-        private int _SuspectArrested = 0;
-        private int _SuspectDead = 0;
+        private List<Ped> _processedSuspects = new List<Ped>();
         //private Ped[] _SuspectArrested;
         //private Ped[] _SuspectDead;
 
@@ -162,58 +161,25 @@ namespace ArthurCallouts.Callouts
 
             }
 
-
-            if (_Suspects[0] && LSPD_First_Response.Mod.API.Functions.IsPedArrested(_Suspects[0]))
-            {
-                _SuspectArrested++;
-                Game.Console.Print();
-                Game.Console.Print("=============================================== LSPD_First_Response.Mod.API.Functions.IsPedArrested(_Suspects[0]) ================================================");
-                Game.Console.Print("suspectArrestedLength " + _SuspectArrested.ToString());
-                Game.Console.Print("suspectDeadLength " + _SuspectDead.ToString());
-                Game.Console.Print("_Suspects " + _Suspects.Length.ToString());
-                Game.Console.Print();
-                Game.Console.Print("=============================================== LSPD_First_Response.Mod.API.Functions.IsPedArrested(_Suspects[0]) ================================================");
-                Game.Console.Print();
-            }
-            if (_Suspects[0] && _Suspects[0].IsDead)
-            {
-                _SuspectDead += _SuspectDead;
-                Game.Console.Print("=============================================== _Suspects[0].IsDead ================================================");
-                Game.Console.Print("suspectArrestedLength " + _SuspectArrested.ToString());
-                Game.Console.Print("suspectDeadLength " + _SuspectDead.ToString());
-                Game.Console.Print("_Suspects " + _Suspects.Length.ToString());
-                Game.Console.Print();
-                Game.Console.Print("=============================================== _Suspects[0].IsDead ================================================");
-            }
-
-            if (_Suspects[1] && LSPD_First_Response.Mod.API.Functions.IsPedArrested(_Suspects[1]))
-            {
-                _SuspectArrested++;
-                Game.Console.Print();
-                Game.Console.Print("=============================================== LSPD_First_Response.Mod.API.Functions.IsPedArrested(_Suspects[1]) ================================================");
-                Game.Console.Print("suspectArrestedLength " + _SuspectArrested.ToString());
-                Game.Console.Print("suspectDeadLength " + _SuspectDead.ToString());
-                Game.Console.Print("_Suspects " + _Suspects.Length.ToString());
-                Game.Console.Print();
-                Game.Console.Print("=============================================== LSPD_First_Response.Mod.API.Functions.IsPedArrested(_Suspects[1]) ================================================");
-                Game.Console.Print();
-            }
-            if (_Suspects[1] && _Suspects[1].IsDead)
-            {
-                _SuspectDead++;
-                Game.Console.Print();
-                Game.Console.Print("=============================================== _Suspects[1].IsDead ================================================");
-                Game.Console.Print("suspectArrestedLength " + _SuspectArrested.ToString());
-                Game.Console.Print("suspectDeadLength " + _SuspectDead.ToString());
-                Game.Console.Print("_Suspects " + _Suspects.Length.ToString());
-                Game.Console.Print();
-                Game.Console.Print("=============================================== _Suspects[1].IsDead ================================================");
-                Game.Console.Print();
-            }
-
             if (Game.IsKeyDown(Settings.EndCall)) End();
             if (Game.LocalPlayer.Character.IsDead) End();
-            if (_Suspects.Length + 1 == _SuspectArrested + _SuspectDead) End();
+
+
+            for (int i = 0; i < _Suspects.Length; i++)
+            {
+                Ped suspect = _Suspects[i];
+                if (suspect != null && !_processedSuspects.Contains(suspect) &&
+                    (suspect.IsDead || LSPD_First_Response.Mod.API.Functions.IsPedArrested(suspect)))
+                {
+                    _processedSuspects.Add(suspect); // Adicione os suspeitos processados à lista
+                    _Blips[i].Delete(); // Remova o blip do suspeito
+                }
+            }
+
+            if (_processedSuspects.Count == _Suspects.Length)
+            {
+                End();
+            }
 
             base.Process();
         }
@@ -233,8 +199,6 @@ namespace ArthurCallouts.Callouts
             _Vehicle = null;
             _Suspects = null;
             _Blips = null;
-            _SuspectArrested = 0;
-            _SuspectDead = 0;
             base.End();
         }
     }
