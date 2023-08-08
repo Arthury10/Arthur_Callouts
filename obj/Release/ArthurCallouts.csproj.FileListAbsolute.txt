@@ -1,0 +1,20 @@
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\ArthurCallouts.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\ArthurCallouts.pdb
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\CalloutInterfaceAPI.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\GrammarPolice.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\LSPD First Response.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\RAGENativeUI.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\RagePluginHook.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\StopThePed.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\LSPD First Response.pdb
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\RAGENativeUI.xml
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\RagePluginHook.xml
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Release\pt-BR\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\plugins\LSPDFR\ArthurCallouts.dll
+C:\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\plugins\LSPDFR\ArthurCallouts.pdb
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Release\ArthurCallouts.csproj.AssemblyReference.cache
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Release\ArthurCallouts.csproj.CoreCompileInputs.cache
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Release\ArthurCallouts.csproj.CopyComplete
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Release\ArthurCallouts.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Release\ArthurCallouts.pdb

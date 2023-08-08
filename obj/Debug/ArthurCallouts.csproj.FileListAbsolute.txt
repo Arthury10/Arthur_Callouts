@@ -1,0 +1,15 @@
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\ArthurCallouts.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\ArthurCallouts.pdb
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\CalloutInterfaceAPI.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\GrammarPolice.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\LSPD First Response.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\RagePluginHook.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\LSPD First Response.pdb
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\RagePluginHook.xml
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\bin\Debug\pt-BR\Microsoft.VisualStudio.QualityTools.UnitTestFramework.resources.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Debug\ArthurCallouts.csproj.AssemblyReference.cache
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Debug\ArthurCallouts.csproj.CoreCompileInputs.cache
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Debug\ArthurCallouts.csproj.CopyComplete
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Debug\ArthurCallouts.dll
+C:\Users\Arthur\Desktop\My_GTA_V_PLUGINS\ArthurCallouts\obj\Debug\ArthurCallouts.pdb
