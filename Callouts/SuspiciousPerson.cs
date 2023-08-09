@@ -11,27 +11,26 @@ namespace ArthurCallouts.Callouts
     [CalloutInterface("Pessoa suspeita reportada (YES)", CalloutProbability.High, "Pessoa suspeita (Oque é?)", "Code 1", "LSPD")]
     public class SuspiciousPerson : Callout
     {
-        //private CreatePedService _PedService;
         private CreateGroupOfPedsService _GroupOfPedsService;
+        private ChooseLocationsSpawn _ChooseLocationsSpawn;
 
-        //private Ped _Suspect;
+        private bool _isDriver;
+
         private Ped[] _Suspects;
 
         private List<Ped> _processedSuspects = new List<Ped>();
-        //private Ped[] _SuspectArrested;
-        //private Ped[] _SuspectDead;
 
+        private Group _GroupOfPeds;
         private RelationshipGroup _SuspectRelationship;
 
         private string _SuspectSpawnZone;
 
-
         private int _NumberOfSuspects = 1;
 
         private Vehicle _Vehicle;
+
         private Vector3 _SpawnPoint;
 
-        //private Blip _Blip;
         private Blip[] _Blips;
 
         private readonly Random _Random = new Random();
@@ -47,7 +46,18 @@ namespace ArthurCallouts.Callouts
         public override bool OnBeforeCalloutDisplayed()
         {
 
-            _SpawnPoint = World.GetNextPositionOnStreet(Game.LocalPlayer.Character.Position.Around(1000f));
+            _ChooseLocationsSpawn = new ChooseLocationsSpawn();
+
+            if (_Random.NextDouble() < 0.5)
+            {
+                _isDriver = true;
+                _SpawnPoint = _ChooseLocationsSpawn.SpawnOnStreet(1000f);
+            } else
+            {
+                _isDriver = false;
+                _SpawnPoint = _ChooseLocationsSpawn.SpawnOnSideWalk(1000f);
+            }
+
             _SuspectSpawnZone = World.GetStreetName(World.GetStreetHash(_SpawnPoint));
 
             ShowCalloutAreaBlipBeforeAccepting(_SpawnPoint, 50f);
@@ -61,24 +71,25 @@ namespace ArthurCallouts.Callouts
 
         public override bool OnCalloutAccepted()
         {
-            //_SuspectRelationship = new RelationshipGroup("SUSPECTS");
 
-
-            //_NumberOfSuspects = _Random.Next(2, 5);
-
-            _NumberOfSuspects = 2;
+            _NumberOfSuspects = _Random.Next(1, 5);
             
             _GroupOfPedsService = new CreateGroupOfPedsService();
             
             _Suspects = _GroupOfPedsService.CreateGroupOfPeds(null, _SpawnPoint, -1, _NumberOfSuspects);
 
             _Blips = new Blip[_Suspects.Length];
-            
+
+            _GroupOfPeds = new Group(_Suspects[0]);
+            _SuspectRelationship = new RelationshipGroup("SUSPECTS");
+
             for (int i = 0; i < _Suspects.Length; i++)
              {
                 _Suspects[i].Tasks.Wander();
-                //_Suspects[i].RelationshipGroup.SetRelationshipWith(_SuspectRelationship, Relationship.Companion);
-                //_Suspects[i].StaysInGroups = true;
+                _Suspects[i].RelationshipGroup.SetRelationshipWith(_SuspectRelationship, Relationship.Companion);
+                _Suspects[i].StaysInGroups = true;
+                //_Suspects[i].Group.AddMember(_Suspects[i]);
+
                 _Blips[i] = _Suspects[i].AttachBlip();
                 _Blips[i].Color = System.Drawing.Color.Yellow;
                 _Blips[0].EnableRoute(System.Drawing.Color.Yellow);
@@ -90,20 +101,10 @@ namespace ArthurCallouts.Callouts
                 }
              }
 
-            Game.Console.Print();
-            Game.Console.Print("=============================================== Chamadas Brasil por Arthur Ropke ================================================");
-            Game.Console.Print();
-            Game.Console.Print(_Suspects.Length.ToString());
-            Game.Console.Print(_Blips.Length.ToString());
-            Game.Console.Print(_NumberOfSuspects.ToString());
-            Game.Console.Print();
-            Game.Console.Print("=============================================== Chamadas Brasil por Arthur Ropke ================================================");
-            Game.Console.Print();
-
             //Condicional para verificar se o suspeito está em um veículo ou não.
-            if (_Random.NextDouble() < 0.5)
+            if (_isDriver)
             {
-                _VehicleSpeed = _Random.Next(30, 140);
+                _VehicleSpeed = _Random.Next(30, 141);
            
                 _Vehicle = new Vehicle("intruder", _SpawnPoint);
 
