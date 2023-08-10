@@ -1,8 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Callouts"
+    "\\Callouts",
+    "\\Server"
   ],
-  "SelectedNode": "\\Settings.cs",
+  "SelectedNode": "\\Server\\HttpServer.cs",
   "PreviewInSolutionExplorer": false
 }

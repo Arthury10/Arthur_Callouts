@@ -6,17 +6,29 @@ using System.Reflection;
 using ArthurCallouts.VersionChecker;
 using System.Runtime;
 using System;
+using ArthurCallouts.Server;
 
 namespace ArthurCallouts
 {
     internal class Main : Plugin
     {
-        public override void Finally() { }
+        private WebSocketServer _webSocketServer;
+        private HttpServer _HttpServer;
+        public override void Finally() 
+        {
+            _webSocketServer.Dispose();
+            _HttpServer.Dispose();
+        }
 
         public override void Initialize()
         {
             Functions.OnOnDutyStateChanged += Functions_OnOnDutyStateChanged;
-            Settings.LoadSettings();   
+            Settings.LoadSettings();
+
+            _HttpServer = new HttpServer();
+            _HttpServer.Start();
+           _webSocketServer = new WebSocketServer();
+           _webSocketServer.Start();
         }
         static void Functions_OnOnDutyStateChanged(bool onDuty)
         {

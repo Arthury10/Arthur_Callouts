@@ -33,32 +33,35 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CalloutInterfaceAPI">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\CalloutInterfaceAPI.dll</HintPath>
-    </Reference>
-    <Reference Include="GrammarPolice">
-      <HintPath>..\..\..\Downloads\GrammarPolice-1.7.2\Grand Theft Auto V\plugins\LSPDFR\GrammarPolice.dll</HintPath>
-    </Reference>
-    <Reference Include="InputManager">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\InputManager.dll</HintPath>
+      <HintPath>lib\CalloutInterfaceAPI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="IPT.Common">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\IPT.Common.dll</HintPath>
+      <HintPath>lib\IPT.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="LSPD First Response">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\plugins\LSPD First Response.dll</HintPath>
+      <HintPath>lib\LSPD First Response.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="RAGENativeUI">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\RAGENativeUI.dll</HintPath>
+      <HintPath>lib\RAGENativeUI.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="RagePluginHook">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\SDK\RagePluginHook.dll</HintPath>
+      <HintPath>lib\RagePluginHook.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="ScriptHookVDotNet3, Version=3.6.0.0, Culture=neutral, processorArchitecture=AMD64">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\ScriptHookVDotNet3.dll</HintPath>
+    <Reference Include="ScriptHookVDotNet3">
+      <HintPath>lib\ScriptHookVDotNet3.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="StopThePed">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Grand Theft Auto V\plugins\LSPDFR\StopThePed.dll</HintPath>
+      <HintPath>lib\StopThePed.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -78,6 +81,10 @@
     <Compile Include="Events\Suspects.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\HttpServer.cs" />
+    <Compile Include="Server\Modules\UserHandler.cs" />
+    <Compile Include="Server\Modules\VehicleInformationHandler.cs" />
+    <Compile Include="Server\WebSocketServer.cs" />
     <Compile Include="Services\ChooseLocationsSpawn.cs" />
     <Compile Include="Services\CreatePedService.cs" />
     <Compile Include="Services\RandomizationService.cs" />
@@ -88,6 +95,7 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="ArthurCallouts.ini" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Logos\ArthurCallouts.png" />
