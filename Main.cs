@@ -7,6 +7,7 @@ using ArthurCallouts.VersionChecker;
 using System.Runtime;
 using System;
 using ArthurCallouts.Server;
+using ArthurCallouts.Services;
 
 namespace ArthurCallouts
 {
@@ -14,6 +15,8 @@ namespace ArthurCallouts
     {
         private WebSocketServer _webSocketServer;
         private HttpServer _HttpServer;
+        private static LoggerService _LoggerService = new LoggerService();
+
         public override void Finally() 
         {
             _webSocketServer.Dispose();
@@ -38,6 +41,8 @@ namespace ArthurCallouts
                 {
                 GameFiber.StartNew(delegate
                 {
+                    _LoggerService.Info("Carregando chamadas");
+
                     RegisterCallouts();
                     Game.Console.Print();
                     Game.Console.Print("=============================================== Chamadas Brasil por Arthur Ropke ================================================");
@@ -50,6 +55,7 @@ namespace ArthurCallouts
                     Game.Console.Print("=============================================== Chamadas Brasil por Arthur Ropke ================================================");
                     Game.Console.Print();
 
+
                     // You can find all textures/images in OpenIV
                     Game.DisplayNotification("ArthurCallouts", "web_lossantospolicedept", "ArthurCallouts", "~y~v" + Assembly.GetExecutingAssembly().GetName().Version.ToString() + " ~o~por Arthur Ropke", "~b~Carregou com sucesso!");
                     // Game.DisplayNotification("web_lossantospolicedept", "web_lossantospolicedept", "UnitedCallouts", "~y~Unstable Build", "This is an ~r~unstable build~w~ of UnitedCallouts for testing. You may notice bugs while playing the unstable build.");
@@ -61,6 +67,8 @@ namespace ArthurCallouts
                         Game.DisplayHelp("You can change all ~y~keys~w~ in the ~g~UnitedCallouts.ini~w~. Press ~b~" + Settings.EndCall + "~w~ to end a callout.", 5000);
                     }
                     else { Settings.HelpMessages = false; } */
+                    _LoggerService.Info("Chamada e configurações foram carregadas com sucesso");
+
                 });
                 } catch (Exception ex)
                 {
@@ -73,6 +81,9 @@ namespace ArthurCallouts
                     Game.Console.Print();
                     Game.Console.Print("=============================================== Chamadas Brasil por Arthur Ropke ================================================");
                     Game.Console.Print();
+
+                    _LoggerService.Exception(ex);
+
                 }
             }
         }

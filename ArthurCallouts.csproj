@@ -12,6 +12,8 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -64,8 +66,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -81,14 +85,32 @@
     <Compile Include="Events\Suspects.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Server\DB\MainDBContext.cs" />
+    <Compile Include="Server\DB\Models\Fine.cs" />
+    <Compile Include="Server\DB\Models\Ped.cs" />
+    <Compile Include="Server\DB\Models\User.cs" />
+    <Compile Include="Server\DB\Models\Vehicle.cs" />
+    <Compile Include="Server\DB\Models\Wanted.cs" />
+    <Compile Include="Server\DB\Repository\FineRepository.cs" />
+    <Compile Include="Server\DB\Repository\PedRepository.cs" />
+    <Compile Include="Server\DB\Repository\UserRepository.cs" />
+    <Compile Include="Server\DB\Repository\VehicleRepository.cs" />
+    <Compile Include="Server\DB\Repository\WantedRepository.cs" />
     <Compile Include="Server\HttpServer.cs" />
     <Compile Include="Server\Modules\UserHandler.cs" />
+    <Compile Include="Server\Modules\FineHandler.cs" />
     <Compile Include="Server\Modules\VehicleInformationHandler.cs" />
+    <Compile Include="Server\Modules\WantedHandler.cs" />
     <Compile Include="Server\WebSocketServer.cs" />
-    <Compile Include="Services\ChooseLocationsSpawn.cs" />
+    <Compile Include="Services\ChooseLocationsSpawnService.cs" />
     <Compile Include="Services\CreatePedService.cs" />
+    <Compile Include="Services\CreatePersonaService.cs" />
+    <Compile Include="Services\LoggerService.cs" />
     <Compile Include="Services\RandomizationService.cs" />
-    <Compile Include="Services\VehicleService.cs" />
+    <Compile Include="Services\RebuildVehicleService.cs" />
+    <Compile Include="Services\RebuildPedPersonService.cs" />
+    <Compile Include="Services\SerializeService.cs" />
+    <Compile Include="Services\CreateVehicleService.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="VersionChecker\PluginCheck.cs" />
   </ItemGroup>

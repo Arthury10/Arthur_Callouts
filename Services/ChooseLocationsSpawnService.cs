@@ -3,7 +3,7 @@
 
 namespace ArthurCallouts.Services
 {
-    internal class ChooseLocationsSpawn
+    internal class ChooseLocationsSpawnService
     {
         public Vector3 SpawnOnSideWalk(float radius)
         {

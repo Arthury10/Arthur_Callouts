@@ -11,8 +11,8 @@ namespace ArthurCallouts.Callouts
     [CalloutInterface("Pessoa suspeita reportada (YES)", CalloutProbability.High, "Pessoa suspeita (Oque é?)", "Code 1", "LSPD")]
     public class SuspiciousPerson : Callout
     {
-        private CreateGroupOfPedsService _GroupOfPedsService;
-        private ChooseLocationsSpawn _ChooseLocationsSpawn;
+        private CreatePedService _GroupOfPedsService;
+        private ChooseLocationsSpawnService _ChooseLocationsSpawnService;
 
         private bool _isDriver;
 
@@ -35,6 +35,8 @@ namespace ArthurCallouts.Callouts
 
         private readonly Random _Random = new Random();
 
+        private LoggerService _Logger = new LoggerService();
+
 
         private bool _PatDown = false;
 
@@ -46,16 +48,16 @@ namespace ArthurCallouts.Callouts
         public override bool OnBeforeCalloutDisplayed()
         {
 
-            _ChooseLocationsSpawn = new ChooseLocationsSpawn();
+            _ChooseLocationsSpawnService = new ChooseLocationsSpawnService();
 
             if (_Random.NextDouble() < 0.5)
             {
                 _isDriver = true;
-                _SpawnPoint = _ChooseLocationsSpawn.SpawnOnStreet(1000f);
+                _SpawnPoint = _ChooseLocationsSpawnService.SpawnOnStreet(1000f);
             } else
             {
                 _isDriver = false;
-                _SpawnPoint = _ChooseLocationsSpawn.SpawnOnSideWalk(1000f);
+                _SpawnPoint = _ChooseLocationsSpawnService.SpawnOnSideWalk(1000f);
             }
 
             _SuspectSpawnZone = World.GetStreetName(World.GetStreetHash(_SpawnPoint));
@@ -74,7 +76,7 @@ namespace ArthurCallouts.Callouts
 
             _NumberOfSuspects = _Random.Next(1, 5);
             
-            _GroupOfPedsService = new CreateGroupOfPedsService();
+            _GroupOfPedsService = new CreatePedService();
             
             _Suspects = _GroupOfPedsService.CreateGroupOfPeds(null, _SpawnPoint, -1, _NumberOfSuspects);
 

@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\Callouts",
-    "\\Server"
+    "\\Server",
+    "\\Server\\Modules",
+    "\\Services"
   ],
-  "SelectedNode": "\\Server\\HttpServer.cs",
+  "SelectedNode": "\\ArthurCallouts.sln",
   "PreviewInSolutionExplorer": false
 }

@@ -1,69 +1,64 @@
-﻿using LSPD_First_Response.Engine.Scripting.Entities;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System;
 using System.Net;
 using Rage;
+using StopThePed.API;
+using ArthurCallouts.Server.Db;
+using ArthurCallouts.Server.DB.Models;
+using ArthurCallouts.Services;
+
+//vamoc criar o modelo de dados para o veículo
 
 namespace ArthurCallouts.Server.Modules
 {
     public class VehicleInformationHandler
     {
-        private readonly Random _Random = new Random();
+        public VehicleModel _vehicleInformationData;
+
+        public PedModel _pedInformationData;
+
+        private LoggerService _Logger = new LoggerService();
+
+        public CreatePersonaService _CreatePersonaService = new CreatePersonaService();
+        public CreateVehicleService _CreateVehicleModel = new CreateVehicleService();
+
+        public MainDBContext _MainDBContext = new MainDBContext();
+
 
         public object HandleGet(HttpListenerRequest request)
         {
             string licensePlate = request.Url.Segments.Last();
-
-            List<Vehicle> vehicles = World.GetAllVehicles().ToList();
-            List<Ped> peds = World.GetAllPeds().ToList();
-
-            Game.Console.Print("Buscando veículo com placa " + licensePlate);
-            Game.Console.Print("Proprietario " + peds.Count);
-
-            Ped ped = peds[_Random.Next(0, peds.Count + 1)];
-
-
-            Persona persona = LSPD_First_Response.Mod.API.Functions.GetPersonaForPed(ped);
-            Vehicle vehicle = vehicles.Find(v => v.LicensePlate == licensePlate);
-
-            LSPD_First_Response.Mod.API.Functions.SetVehicleOwnerName(vehicles.Find(v => v.LicensePlate == licensePlate), persona.FullName);
-
-            DateTime dateTime = new DateTime(_Random.Next(1990, 2000), _Random.Next(1, 12), _Random.Next(1, 28));
             
-            persona.Birthday = dateTime;
-
-            persona.WantedInformation.LastSeenPosition = ped.Position;
-
-            //vamos setar um tempo de 0 a 10 dias para a ultima vez que foi visto
-            DateTime dateTimeLastSeen = DateTime.Now.AddDays(_Random.Next(0, 10));
-            persona.WantedInformation.LastSeenUtc = dateTimeLastSeen;
+            Game.DisplayNotification("Buscando veículo com placa " + licensePlate);
 
 
-            if (persona.Wanted)
+
+            if (_vehicleInformationData != null)
             {
-                if (_Random.NextDouble() < 0.5)
+                if (licensePlate == _vehicleInformationData.LicensePlate)
                 {
-                    ped.Inventory.GiveNewWeapon(new WeaponAsset("WEAPON_PISTOL"), 100, false);
+                    return _vehicleInformationData;
+                } else
+                {
+                    _vehicleInformationData = _MainDBContext.VehicleRepository.GetVehicle(licensePlate);
+
+                    if (_vehicleInformationData != null)
+                    {
+                        return _vehicleInformationData;
+                    }
                 }
             }
 
+            Vector3 vector3 = new Vector3(0, 0, 0);
 
-            if (vehicles != null)
+            _pedInformationData = _CreatePersonaService.CreatePerson(vector3);
+
+            _vehicleInformationData = _CreateVehicleModel.CreateVehicleModel(licensePlate, _pedInformationData.PedId);
+
+            if (_vehicleInformationData != null)
             {
-                return new
-                {
-                    personaData = persona,
-                    vehicleModel = vehicle.Model.Name,
-                    primaryColor = vehicle.PrimaryColor,
-                    secondaryColor = vehicle.SecondaryColor,
-                    licensePlate = vehicle.LicensePlate,
-                    ownerName = LSPD_First_Response.Mod.API.Functions.GetVehicleOwnerName(vehicle),
-                    isStolen = vehicle.IsStolen,
-                    insuranceStatus = StopThePed.API.Functions.getVehicleInsuranceStatus(vehicle),
-                    registrationStatus = StopThePed.API.Functions.getVehicleRegistrationStatus(vehicle),
-                    sreetWasLastSeen = World.GetStreetName(ped.Position),
-                };
+                return _vehicleInformationData;
             }
 
             return new

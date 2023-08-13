@@ -16,6 +16,7 @@ namespace ArthurCallouts.Server
 
         private UserHandler _userHandler = new UserHandler();
         private VehicleInformationHandler _vehicleInformationHandler = new VehicleInformationHandler();
+        private FineHandler _fineHandler = new FineHandler();
 
         public HttpServer()
         {
@@ -49,6 +50,9 @@ namespace ArthurCallouts.Server
 
                 switch (request.HttpMethod)
                 {
+                    case "OPTIONS":
+                        response.StatusCode = 200; // OK
+                        break;
                     case "GET":
                         responseData = HandleGetRequest(request);
                         break;
@@ -95,6 +99,7 @@ namespace ArthurCallouts.Server
              if (path.StartsWith("/user"))
             {
                 return _userHandler.HandleGet(request);
+
             } else if (path.StartsWith("/vehicleInformation"))
             {
                 return _vehicleInformationHandler.HandleGet(request);
@@ -106,7 +111,13 @@ namespace ArthurCallouts.Server
 
         private object HandlePostRequest(HttpListenerRequest request)
         {
-            // Implemente sua lógica para lidar com a solicitação POST aqui
+            string path = request.Url.AbsolutePath;
+
+            if (path.StartsWith("/fines"))
+            {
+                return _fineHandler.HandlePost(request);
+            }
+
             return new { message = "POST request received" };
         }
 
